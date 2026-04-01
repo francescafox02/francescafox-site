@@ -2,18 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Your Name | Neon Dream Gallery</title>
+  <title>Francesca Fox | Shesafox</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Cursor -->
+  <!-- Cursor Effect -->
   <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
 
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #050505;
+      font-family: Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top, #0a0a0a, #000);
       color: white;
+      cursor: crosshair;
     }
 
     header {
@@ -24,14 +25,16 @@
     }
 
     header h2 {
-      color: #ff2bd6;
-      text-shadow: 0 0 10px #ff2bd6;
+      color: #ff0767;
+      letter-spacing: 2px;
     }
 
     nav a {
       margin-left: 20px;
       text-decoration: none;
-      color: #aaa;
+      color: #79ff00;
+      font-size: 0.9rem;
+      transition: 0.3s;
     }
 
     nav a:hover {
@@ -40,36 +43,56 @@
 
     .hero {
       text-align: center;
-      padding: 100px 20px;
+      padding: 120px 20px 80px;
     }
 
     .hero h1 {
-      font-size: 3rem;
-      color: #ff2bd6;
-      text-shadow: 0 0 20px #ff2bd6, 0 0 40px #00eaff;
+      font-size: 3.2rem;
+      color: #ff0767;
     }
 
+    .hero p {
+      color: #00eaff;
+      letter-spacing: 2px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    /* Animated ✦ and apostrophe stars */
+    .star {
+      color: #ff0767;
+      margin: 0 5px;
+      display: inline-block;
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.7; }
+    }
+
+    /* Gallery */
     .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 10px;
+      column-count: 3;
+      column-gap: 10px;
       padding: 20px;
     }
 
     .art {
+      break-inside: avoid;
+      margin-bottom: 10px;
       position: relative;
       overflow: hidden;
     }
 
     .art img {
       width: 100%;
-      height: 320px;
-      object-fit: cover;
       transition: 0.4s;
     }
 
     .art:hover img {
-      transform: scale(1.05);
+      transform: scale(1.03);
       filter: brightness(1.2);
     }
 
@@ -77,11 +100,14 @@
       position: absolute;
       bottom: 0;
       width: 100%;
-      padding: 10px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      padding: 12px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
       opacity: 0;
       transition: 0.3s;
-      color: #ff2bd6;
+      color: #ff0767;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .art:hover .overlay {
@@ -89,93 +115,95 @@
     }
 
     .section {
-      padding: 60px 40px;
-      max-width: 800px;
+      padding: 80px 40px;
+      max-width: 700px;
       margin: auto;
+      text-align: center;
     }
 
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      border: 1px solid #ff2bd6;
-      color: #ff2bd6;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      background: #ff2bd6;
-      color: black;
-      box-shadow: 0 0 20px #ff2bd6;
+    .section h2 {
+      color: #79ff00;
+      margin-bottom: 20px;
     }
 
     footer {
       text-align: center;
-      padding: 30px;
-      color: #666;
+      padding: 40px;
+      color: #555;
+      font-size: 0.8rem;
+    }
+
+    @media(max-width: 800px) {
+      .gallery {
+        column-count: 1;
+      }
     }
   </style>
 </head>
+
 <body>
 
 <header>
-  <h2>Your Name</h2>
+  <h2>SHE<span class="star">’</span>S A F<span class="star">✦</span>X</h2>
   <nav>
-    <a href="#gallery">Collection</a>
-    <a href="#about">About</a>
-    <a href="#shop">Shop</a>
+    <a href="#gallery">Archive</a>
+    <a href="#about">Info</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
 <section class="hero">
-  <h1>Neon Dream Archive ✨</h1>
-  <p>Bold bodies, color, and electric emotion</p>
+  <h1>
+    <span class="star">✦</span> Francesca Fox <span class="star">✦</span>
+  </h1>
+  <p>distortion / digital intimacy</p>
 </section>
 
 <section id="gallery" class="gallery">
   <div class="art">
-    <img src="https://via.placeholder.com/400x300">
-    <div class="overlay">Untitled #1</div>
+    <img src="DSC00838-2.png">
+    <div class="overlay">Untitled — 2026</div>
   </div>
+
   <div class="art">
-    <img src="https://via.placeholder.com/400x300">
-    <div class="overlay">Untitled #2</div>
+    <img src="DFEF75DD-7819-46DE-BBB8-1F80BD2CC5B6.jpg">
+    <div class="overlay">Untitled — 2026</div>
   </div>
+
   <div class="art">
-    <img src="https://via.placeholder.com/400x300">
-    <div class="overlay">Untitled #3</div>
+    <img src="C58320A8-CE23-4446-8270-9CD3695F45A4.jpeg">
+    <div class="overlay">Untitled — 2026</div>
   </div>
 </section>
 
 <section id="about" class="section">
-  <h2>About</h2>
+  <h2>Info</h2>
   <p>
-    My work explores femininity, vulnerability, and neon surrealism.
+    I explore the relationship between body, technology, and perception.
+    My work uses color, distortion, and composition to investigate
+    digital intimacy and emotional projection.
   </p>
-</section>
-
-<section id="shop" class="section">
-  <h2>Shop the Magic</h2>
-  <p>Prints and originals coming soon.</p>
-  <a class="btn" href="#">Join Mailing List</a>
 </section>
 
 <section id="contact" class="section">
   <h2>Contact</h2>
   <p>Email: fffrannyfranfran469@gmail.com</p>
+  <p>
+    <a href="#">Instagram</a> /
+    <a href="#">TikTok</a>
+  </p>
 </section>
 
 <footer>
   <p>© 2026 Francesca Fox</p>
 </footer>
 
+<!-- Cursor Script -->
 <script>
   window.addEventListener("load", () => {
     new cursoreffects.fairyDustCursor({
-      colors: ["#ff2bd6", "#00eaff"],
-      fairySymbol: "✨"
+      colors: ["#ff0767", "#00eaff", "#ff8cf0"],
+      fairySymbol: "✧"
     });
   });
 </script>
