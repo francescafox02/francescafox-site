@@ -29,6 +29,35 @@
       letter-spacing: 2px;
     }
 
+    /* Rotating diamonds */
+    .diamond {
+      display: inline-block;
+      margin: 0 6px;
+      color: #ff0767;
+    }
+
+    .diamond-left {
+      animation: rotateLeft 4s linear infinite;
+    }
+
+    .diamond-right {
+      animation: rotateRight 4s linear infinite;
+    }
+
+    .apostrophe {
+      color: #ff0767;
+    }
+
+    @keyframes rotateLeft {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+
+    @keyframes rotateRight {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     nav a {
       margin-left: 20px;
       text-decoration: none;
@@ -58,7 +87,6 @@
       font-size: 0.9rem;
     }
 
-    /* Animated ✦ and apostrophe stars */
     .star {
       color: #ff0767;
       margin: 0 5px;
@@ -72,30 +100,37 @@
       100% { transform: scale(1); opacity: 0.7; }
     }
 
-    /* Gallery */
+    /* Horizontal scrolling gallery */
     .gallery {
-      column-count: 3;
-      column-gap: 10px;
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
       padding: 20px;
+      scroll-snap-type: x mandatory;
     }
 
     .art {
-      break-inside: avoid;
-      margin-bottom: 10px;
+      flex: 0 0 auto;
+      width: 300px;
       position: relative;
       overflow: hidden;
+      scroll-snap-align: center;
+      border-radius: 8px;
     }
 
     .art img {
       width: 100%;
-      transition: 0.4s;
+      display: block;
+      transition: transform 0.4s, filter 0.4s;
     }
 
     .art:hover img {
-      transform: scale(1.03);
+      transform: scale(1.05);
       filter: brightness(1.2);
     }
 
+    /* Only show art titles on hover */
     .overlay {
       position: absolute;
       bottom: 0;
@@ -103,7 +138,7 @@
       padding: 12px;
       background: linear-gradient(transparent, rgba(0,0,0,0.9));
       opacity: 0;
-      transition: 0.3s;
+      transition: opacity 0.3s;
       color: #ff0767;
       font-size: 0.8rem;
       letter-spacing: 1px;
@@ -133,10 +168,14 @@
       font-size: 0.8rem;
     }
 
+    /* Hide scrollbar on Webkit */
+    .gallery::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Responsive */
     @media(max-width: 800px) {
-      .gallery {
-        column-count: 1;
-      }
+      .art { width: 80%; }
     }
   </style>
 </head>
@@ -144,7 +183,12 @@
 <body>
 
 <header>
-  <h2>SHE<span class="star">’</span>S A F<span class="star">✦</span>X</h2>
+  <h2>
+    <span class="diamond diamond-left">✦</span>
+    SHE<span class="apostrophe">’</span>S A FOX
+    <span class="diamond diamond-right">✦</span>
+  </h2>
+
   <nav>
     <a href="#gallery">Archive</a>
     <a href="#about">Info</a>
@@ -159,20 +203,36 @@
   <p>distortion / digital intimacy</p>
 </section>
 
+<!-- Horizontal scrolling gallery -->
 <section id="gallery" class="gallery">
   <div class="art">
-    <img src="IMG_1203.jpeg">
-    <div class="overlay">Untitled — 2026</div>
+    <img src="images/Scan 28.jpeg" alt="Scan 28 artwork by Francesca Fox, 2026">
+    <div class="overlay">Scan 28 — 2026</div>
   </div>
 
   <div class="art">
-    <img src="Scan 28.jpeg">
-    <div class="overlay">Untitled — 2026</div>
+    <img src="images/SIX_F39F334F-35CB-42A5-BC2D-551E46DF3504.jpeg" alt="SIX_F39F334F artwork by Francesca Fox, 2026">
+    <div class="overlay">SIX_F39F334F — 2026</div>
   </div>
 
   <div class="art">
-    <IMG_8532.jpeg">
-    <div class="overlay">Untitled — 2026</div>
+    <img src="images/SIX_F269289E-94CB-469F-871C-A35833B1DD76.jpeg" alt="SIX_F269289E artwork by Francesca Fox, 2026">
+    <div class="overlay">SIX_F269289E — 2026</div>
+  </div>
+
+  <div class="art">
+    <img src="images/IMG_8532.jpeg" alt="IMG 8532 artwork by Francesca Fox, 2026">
+    <div class="overlay">IMG 8532 — 2026</div>
+  </div>
+
+  <div class="art">
+    <img src="images/IMG_1203.jpeg" alt="IMG 1203 artwork by Francesca Fox, 2026">
+    <div class="overlay">IMG 1203 — 2026</div>
+  </div>
+
+  <div class="art">
+    <img src="images/C58320A8-CE23-4446-8270-9CD3695F45A4.jpeg" alt="C58320A8 artwork by Francesca Fox, 2026">
+    <div class="overlay">C58320A8 — 2026</div>
   </div>
 </section>
 
@@ -190,7 +250,7 @@
   <p>Email: fffrannyfranfran469@gmail.com</p>
   <p>
     <a href="#">Instagram</a> /
-    <a href="#">TikTok</a>
+    <a href="https://www.tiktok.com/@foxayymomma?is_from_webapp=1&sender_device=pc" target="_blank">TikTok</a>
   </p>
 </section>
 
