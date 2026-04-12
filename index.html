@@ -5,7 +5,6 @@
   <title>Francesca Fox | Shesafox</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Cursor Effect -->
   <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
 
   <style>
@@ -29,34 +28,14 @@
       letter-spacing: 2px;
     }
 
-    /* Rotating diamonds */
-    .diamond {
-      display: inline-block;
-      margin: 0 6px;
-      color: #ff0767;
-    }
+    .diamond { display: inline-block; margin: 0 6px; color: #ff0767; }
+    .diamond-left { animation: rotateLeft 4s linear infinite; }
+    .diamond-right { animation: rotateRight 4s linear infinite; }
 
-    .diamond-left {
-      animation: rotateLeft 4s linear infinite;
-    }
+    .apostrophe { color: #ff0767; }
 
-    .diamond-right {
-      animation: rotateRight 4s linear infinite;
-    }
-
-    .apostrophe {
-      color: #ff0767;
-    }
-
-    @keyframes rotateLeft {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(-360deg); }
-    }
-
-    @keyframes rotateRight {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+    @keyframes rotateLeft { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+    @keyframes rotateRight { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
     nav a {
       margin-left: 20px;
@@ -66,19 +45,14 @@
       transition: 0.3s;
     }
 
-    nav a:hover {
-      color: #00eaff;
-    }
+    nav a:hover { color: #00eaff; }
 
     .hero {
       text-align: center;
       padding: 120px 20px 80px;
     }
 
-    .hero h1 {
-      font-size: 3.2rem;
-      color: #ff0767;
-    }
+    .hero h1 { font-size: 3.2rem; color: #ff0767; }
 
     .hero p {
       color: #00eaff;
@@ -100,12 +74,10 @@
       100% { transform: scale(1); opacity: 0.7; }
     }
 
-    /* Horizontal scrolling gallery */
     .gallery {
       display: flex;
       gap: 20px;
       overflow-x: auto;
-      scroll-behavior: smooth;
       padding: 20px;
       scroll-snap-type: x mandatory;
     }
@@ -123,6 +95,7 @@
       width: 100%;
       display: block;
       transition: transform 0.4s, filter 0.4s;
+      cursor: pointer;
     }
 
     .art:hover img {
@@ -130,7 +103,6 @@
       filter: brightness(1.2);
     }
 
-    /* Only show art titles on hover */
     .overlay {
       position: absolute;
       bottom: 0;
@@ -145,9 +117,7 @@
       text-transform: uppercase;
     }
 
-    .art:hover .overlay {
-      opacity: 1;
-    }
+    .art:hover .overlay { opacity: 1; }
 
     .section {
       padding: 80px 40px;
@@ -156,10 +126,7 @@
       text-align: center;
     }
 
-    .section h2 {
-      color: #79ff00;
-      margin-bottom: 20px;
-    }
+    .section h2 { color: #79ff00; }
 
     footer {
       text-align: center;
@@ -168,14 +135,50 @@
       font-size: 0.8rem;
     }
 
-    /* Hide scrollbar on Webkit */
-    .gallery::-webkit-scrollbar {
-      display: none;
-    }
+    .gallery::-webkit-scrollbar { display: none; }
 
-    /* Responsive */
     @media(max-width: 800px) {
       .art { width: 80%; }
+    }
+
+    /* ✨ LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 40px 20px;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 70%;
+      margin-bottom: 20px;
+    }
+
+    .lightbox-caption h3 {
+      color: #ff0767;
+      margin-bottom: 10px;
+    }
+
+    .lightbox-caption p {
+      color: #00eaff;
+      max-width: 500px;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
@@ -203,38 +206,58 @@
   <p>distortion / digital intimacy</p>
 </section>
 
-<!-- Horizontal scrolling gallery -->
 <section id="gallery" class="gallery">
   <div class="art">
-    <img src="images/Scan 28.jpeg" alt="Scan 28 artwork by Francesca Fox, 2026">
+    <img src="images/Scan 28.jpeg"
+         data-title="Scan 28 — 2026"
+         data-desc="signal loss / skin as interface / memory buffering">
     <div class="overlay">Scan 28 — 2026</div>
   </div>
 
   <div class="art">
-    <img src="images/SIX_F39F334F-35CB-42A5-BC2D-551E46DF3504.jpeg" alt="SIX_F39F334F artwork by Francesca Fox, 2026">
+    <img src="images/SIX_F39F334F-35CB-42A5-BC2D-551E46DF3504.jpeg"
+         data-title="SIX_F39F334F — 2026"
+         data-desc="fragmented identity / compressed emotion">
     <div class="overlay">SIX_F39F334F — 2026</div>
   </div>
 
   <div class="art">
-    <img src="images/SIX_F269289E-94CB-469F-871C-A35833B1DD76.jpeg" alt="SIX_F269289E artwork by Francesca Fox, 2026">
+    <img src="images/SIX_F269289E-94CB-469F-871C-A35833B1DD76.jpeg"
+         data-title="SIX_F269289E — 2026"
+         data-desc="glitch body / synthetic intimacy">
     <div class="overlay">SIX_F269289E — 2026</div>
   </div>
 
   <div class="art">
-    <img src="images/IMG_8532.jpeg" alt="IMG 8532 artwork by Francesca Fox, 2026">
+    <img src="images/IMG_8532.jpeg"
+         data-title="IMG 8532 — 2026"
+         data-desc="surveillance gaze / blurred authorship">
     <div class="overlay">IMG 8532 — 2026</div>
   </div>
 
   <div class="art">
-    <img src="images/IMG_1203.jpeg" alt="IMG 1203 artwork by Francesca Fox, 2026">
+    <img src="images/IMG_1203.jpeg"
+         data-title="IMG 1203 — 2026"
+         data-desc="memory distortion / color as emotion">
     <div class="overlay">IMG 1203 — 2026</div>
   </div>
 
   <div class="art">
-    <img src="images/C58320A8-CE23-4446-8270-9CD3695F45A4.jpeg" alt="C58320A8 artwork by Francesca Fox, 2026">
+    <img src="images/C58320A8-CE23-4446-8270-9CD3695F45A4.jpeg"
+         data-title="C58320A8 — 2026"
+         data-desc="digital body / interface collapse">
     <div class="overlay">C58320A8 — 2026</div>
   </div>
 </section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox">
+  <img id="lightbox-img">
+  <div class="lightbox-caption">
+    <h3 id="lightbox-title"></h3>
+    <p id="lightbox-desc"></p>
+  </div>
+</div>
 
 <section id="about" class="section">
   <h2>Info</h2>
@@ -250,7 +273,7 @@
   <p>Email: fffrannyfranfran469@gmail.com</p>
   <p>
     <a href="#">Instagram</a> /
-    <a href="https://www.tiktok.com/@foxayymomma?is_from_webapp=1&sender_device=pc" target="_blank">TikTok</a>
+    <a href="https://www.tiktok.com/@foxayymomma" target="_blank">TikTok</a>
   </p>
 </section>
 
@@ -258,13 +281,32 @@
   <p>© 2026 Francesca Fox</p>
 </footer>
 
-<!-- Cursor Script -->
 <script>
   window.addEventListener("load", () => {
     new cursoreffects.fairyDustCursor({
       colors: ["#ff0767", "#00eaff", "#ff8cf0"],
       fairySymbol: "✧"
     });
+  });
+
+  const lightbox = document.getElementById("lightbox");
+  const img = document.getElementById("lightbox-img");
+  const title = document.getElementById("lightbox-title");
+  const desc = document.getElementById("lightbox-desc");
+
+  document.querySelectorAll(".art img").forEach(image => {
+    image.addEventListener("click", () => {
+      lightbox.style.display = "flex";
+      img.src = image.src;
+      title.textContent = image.dataset.title;
+      desc.textContent = image.dataset.desc;
+    });
+  });
+
+  lightbox.addEventListener("click", (e) => {
+    if (e.target !== img) {
+      lightbox.style.display = "none";
+    }
   });
 </script>
 
