@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -214,4 +213,292 @@
       background: rgba(0,0,0,0.96);
       display: none;
       flex-direction: column;
-      justify-content
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 40px 20px;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 75%;
+      object-fit: contain;
+      margin-bottom: 20px;
+    }
+
+    .lightbox-caption h3 {
+      color: var(--pink);
+      margin-bottom: 10px;
+    }
+
+    .lightbox-caption p {
+      color: #999;
+      max-width: 500px;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px;
+      color: #555;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      border-top: 1px solid #171717;
+    }
+
+    @media(max-width: 800px) {
+      header {
+        padding: 18px 20px;
+      }
+
+      nav {
+        gap: 14px;
+      }
+
+      nav a {
+        font-size: 0.7rem;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 15px 20px;
+        gap: 12px;
+      }
+    }
+
+    @media(max-width: 500px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h2>
+    <span class="diamond diamond-left">✦</span>
+    SHE<span class="apostrophe">’</span>S A FOX
+    <span class="diamond diamond-right">✦</span>
+  </h2>
+
+  <nav>
+    <a href="#photography" id="photo-link" class="selected"
+       onclick="showPortfolio('photography')">PHOTOGRAPHY</a>
+
+    <a href="#art" id="art-link"
+       onclick="showPortfolio('art')">ART</a>
+
+    <a href="#about" onclick="showSection('about')">INFO</a>
+
+    <a href="#contact" onclick="showSection('contact')">CONTACT</a>
+  </nav>
+</header>
+
+<!-- PHOTOGRAPHY: DEFAULT HOMEPAGE -->
+
+<main id="photography" class="portfolio active">
+
+  <section class="gallery">
+
+    <!-- ADD YOUR PHOTOGRAPHY IMAGES HERE -->
+
+  </section>
+
+</main>
+
+<!-- ART -->
+
+<section id="art" class="portfolio">
+
+  <section class="gallery">
+
+    <div class="art">
+      <img src="images/Scan 28.jpeg"
+           alt="Scan 28"
+           data-title="Scan 28 — 2026"
+           data-desc="">
+      <div class="overlay">Scan 28 — 2026</div>
+    </div>
+
+    <div class="art">
+      <img src="images/SIX_F39F334F-35CB-42A5-BC2D-551E46DF3504.jpeg"
+           alt="Artwork"
+           data-title="Untitled — 2026"
+           data-desc="">
+      <div class="overlay">Untitled — 2026</div>
+    </div>
+
+    <div class="art">
+      <img src="images/SIX_F269289E-94CB-469F-871C-A35833B1DD76.jpeg"
+           alt="Artwork"
+           data-title="Untitled — 2026"
+           data-desc="">
+      <div class="overlay">Untitled — 2026</div>
+    </div>
+
+    <div class="art">
+      <img src="images/IMG_8532.jpeg"
+           alt="Artwork"
+           data-title="Untitled — 2026"
+           data-desc="">
+      <div class="overlay">Untitled — 2026</div>
+    </div>
+
+    <div class="art">
+      <img src="images/IMG_1203.jpeg"
+           alt="Artwork"
+           data-title="Untitled — 2026"
+           data-desc="">
+      <div class="overlay">Untitled — 2026</div>
+    </div>
+
+    <div class="art">
+      <img src="images/C58320A8-CE23-4446-8270-9CD3695F45A4.jpeg"
+           alt="Artwork"
+           data-title="Untitled — 2026"
+           data-desc="">
+      <div class="overlay">Untitled — 2026</div>
+    </div>
+
+  </section>
+
+</section>
+
+<!-- INFO -->
+
+<section id="about" class="section">
+  <h2>Info</h2>
+  <p>
+    Francesca Fox is a photographer and multidisciplinary artist
+    working across photography, digital art, and visual design.
+  </p>
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact" class="section">
+  <h2>Contact</h2>
+  <p>
+    <a href="mailto:fffrannyfranfran469@gmail.com">Get in touch</a>
+  </p>
+  <p>
+    <a href="#">Instagram</a> /
+    <a href="https://www.tiktok.com/@foxayymomma" target="_blank">TikTok</a>
+  </p>
+</section>
+
+<footer>
+  © 2026 FRANCESCA FOX
+</footer>
+
+<!-- LIGHTBOX -->
+
+<div id="lightbox" class="lightbox">
+  <img id="lightbox-img" alt="">
+  <div class="lightbox-caption">
+    <h3 id="lightbox-title"></h3>
+    <p id="lightbox-desc"></p>
+  </div>
+</div>
+
+<script>
+
+  // CURSOR EFFECT
+
+  window.addEventListener("load", () => {
+    if (window.cursoreffects) {
+      new cursoreffects.fairyDustCursor({
+        colors: ["#ff0767", "#79ff00", "#ff8cf0"],
+        fairySymbol: "✧"
+      });
+    }
+  });
+
+
+  // NAVIGATION
+
+  function showPortfolio(section) {
+    document.querySelectorAll(".portfolio").forEach(page => {
+      page.classList.remove("active");
+    });
+
+    document.getElementById(section).classList.add("active");
+
+    document.getElementById("photo-link").classList.toggle(
+      "selected", section === "photography"
+    );
+
+    document.getElementById("art-link").classList.toggle(
+      "selected", section === "art"
+    );
+
+    document.getElementById("about").style.display = "none";
+    document.getElementById("contact").style.display = "none";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+
+  function showSection(section) {
+    document.querySelectorAll(".portfolio").forEach(page => {
+      page.classList.remove("active");
+    });
+
+    document.getElementById("about").style.display =
+      section === "about" ? "block" : "none";
+
+    document.getElementById("contact").style.display =
+      section === "contact" ? "block" : "none";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+
+  // LIGHTBOX
+
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxTitle = document.getElementById("lightbox-title");
+  const lightboxDesc = document.getElementById("lightbox-desc");
+
+  document.querySelectorAll(".art img").forEach(image => {
+    image.addEventListener("click", () => {
+      lightbox.style.display = "flex";
+      lightboxImg.src = image.src;
+      lightboxImg.alt = image.alt;
+      lightboxTitle.textContent = image.dataset.title;
+      lightboxDesc.textContent = image.dataset.desc;
+    });
+  });
+
+  lightbox.addEventListener("click", (event) => {
+    if (event.target !== lightboxImg) {
+      lightbox.style.display = "none";
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      lightbox.style.display = "none";
+    }
+  });
+
+</script>
+
+</body>
+</html>
+```
