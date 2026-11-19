@@ -1,84 +1,262 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Francesca Fox | Shesafox</title>
+  <title>Francesca Fox | She's a Fox</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
 
   <style>
+    :root {
+      --pink: #ff0767;
+      --green: #79ff00;
+      --black: #050505;
+      --white: #f5f5f5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: Helvetica, Arial, sans-serif;
-      background: radial-gradient(circle at top, #0a0a0a, #000);
-      color: white;
+      background: radial-gradient(circle at top, #101010, var(--black));
+      color: var(--white);
       cursor: crosshair;
     }
+
+    a {
+      color: inherit;
+    }
+
+    /* HEADER */
 
     header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 20px 40px;
-      border-bottom: 1px solid #111;
+      border-bottom: 1px solid #202020;
     }
 
     header h2 {
-      color: #ff0767;
+      color: var(--white);
       letter-spacing: 2px;
+      font-size: 1.15rem;
+      margin: 0;
     }
 
-    .diamond { display: inline-block; margin: 0 6px; color: #ff0767; }
-    .diamond-left { animation: rotateLeft 4s linear infinite; }
-    .diamond-right { animation: rotateRight 4s linear infinite; }
+    .diamond {
+      display: inline-block;
+      margin: 0 6px;
+      color: var(--pink);
+    }
 
-    .apostrophe { color: #ff0767; }
+    .diamond-left {
+      animation: rotateLeft 4s linear infinite;
+    }
 
-    @keyframes rotateLeft { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
-    @keyframes rotateRight { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .diamond-right {
+      animation: rotateRight 4s linear infinite;
+    }
+
+    .apostrophe {
+      color: var(--pink);
+    }
+
+    @keyframes rotateLeft {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+
+    @keyframes rotateRight {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+    }
 
     nav a {
-      margin-left: 20px;
       text-decoration: none;
-      color: #79ff00;
-      font-size: 0.9rem;
-      transition: 0.3s;
+      color: var(--green);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: color 0.3s;
     }
 
-    nav a:hover { color: #00eaff; }
+    nav a:hover {
+      color: var(--pink);
+    }
 
-    .hero {
+    /* LANDING PAGE */
+
+    .landing {
+      min-height: calc(100vh - 75px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 30px;
+    }
+
+    .landing-title {
+      color: var(--pink);
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: 4px;
+      margin: 0 0 60px;
       text-align: center;
-      padding: 120px 20px 80px;
     }
 
-    .hero h1 { font-size: 3.2rem; color: #ff0767; }
+    .choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      max-width: 1100px;
+      gap: 24px;
+    }
 
-    .hero p {
-      color: #00eaff;
+    .choice {
+      min-height: 360px;
+      border: 1px solid #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      background: #101010;
+      transition: border-color 0.4s, background 0.4s;
+    }
+
+    .choice::before {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border: 1px solid var(--pink);
+      transform: rotate(45deg);
+      opacity: 0.15;
+      transition: transform 0.6s, opacity 0.4s;
+    }
+
+    .choice:nth-child(2)::before {
+      border-color: var(--green);
+    }
+
+    .choice:hover {
+      border-color: var(--pink);
+      background: #171017;
+    }
+
+    .choice:nth-child(2):hover {
+      border-color: var(--green);
+      background: #101710;
+    }
+
+    .choice:hover::before {
+      transform: rotate(135deg) scale(1.4);
+      opacity: 0.5;
+    }
+
+    .choice span {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: var(--white);
+      transition: color 0.3s;
+    }
+
+    .choice:first-child:hover span {
+      color: var(--pink);
+    }
+
+    .choice:nth-child(2):hover span {
+      color: var(--green);
+    }
+
+    /* PORTFOLIO PAGES */
+
+    .portfolio {
+      display: none;
+      min-height: calc(100vh - 75px);
+      padding-bottom: 60px;
+    }
+
+    .portfolio.active {
+      display: block;
+    }
+
+    .portfolio-heading {
+      text-align: center;
+      padding: 75px 20px 45px;
+    }
+
+    .portfolio-heading h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--pink);
+      letter-spacing: 3px;
+      margin: 0;
+    }
+
+    #photography .portfolio-heading h1 {
+      color: var(--pink);
+    }
+
+    #art .portfolio-heading h1 {
+      color: var(--green);
+    }
+
+    .portfolio-heading p {
+      color: #999;
+      font-size: 0.85rem;
       letter-spacing: 2px;
-      margin-top: 10px;
-      font-size: 0.9rem;
+      margin-top: 15px;
+      text-transform: uppercase;
     }
 
-    .star {
-      color: #ff0767;
-      margin: 0 5px;
-      display: inline-block;
-      animation: pulse 2s infinite alternate;
+    .portfolio-switch {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.7; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.7; }
+    .portfolio-switch a {
+      text-decoration: none;
+      color: #777;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      transition: color 0.3s;
     }
+
+    .portfolio-switch a:hover,
+    .portfolio-switch a.selected {
+      color: var(--pink);
+    }
+
+    #art .portfolio-switch a.selected {
+      color: var(--green);
+    }
+
+    /* GALLERY */
 
     .gallery {
       display: flex;
       gap: 20px;
       overflow-x: auto;
-      padding: 20px;
+      padding: 20px 40px 35px;
       scroll-snap-type: x mandatory;
     }
 
@@ -88,7 +266,6 @@
       position: relative;
       overflow: hidden;
       scroll-snap-align: center;
-      border-radius: 8px;
     }
 
     .art img {
@@ -100,55 +277,76 @@
 
     .art:hover img {
       transform: scale(1.05);
-      filter: brightness(1.2);
+      filter: brightness(1.1);
     }
 
     .overlay {
       position: absolute;
       bottom: 0;
+      left: 0;
       width: 100%;
-      padding: 12px;
+      padding: 15px 12px;
       background: linear-gradient(transparent, rgba(0,0,0,0.9));
       opacity: 0;
       transition: opacity 0.3s;
-      color: #ff0767;
+      color: var(--pink);
       font-size: 0.8rem;
       letter-spacing: 1px;
       text-transform: uppercase;
+      pointer-events: none;
     }
 
-    .art:hover .overlay { opacity: 1; }
+    #art .overlay {
+      color: var(--green);
+    }
+
+    .art:hover .overlay {
+      opacity: 1;
+    }
+
+    .gallery::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* INFO + CONTACT */
 
     .section {
-      padding: 80px 40px;
-      max-width: 700px;
+      padding: 65px 30px;
+      max-width: 650px;
       margin: auto;
       text-align: center;
     }
 
-    .section h2 { color: #79ff00; }
-
-    footer {
-      text-align: center;
-      padding: 40px;
-      color: #555;
-      font-size: 0.8rem;
+    .section h2 {
+      color: var(--green);
+      letter-spacing: 2px;
+      font-size: 1rem;
+      text-transform: uppercase;
     }
 
-    .gallery::-webkit-scrollbar { display: none; }
-
-    @media(max-width: 800px) {
-      .art { width: 80%; }
+    .section p {
+      color: #aaa;
+      line-height: 1.8;
+      font-size: 0.95rem;
     }
 
-    /* ✨ LIGHTBOX */
+    .section a {
+      color: var(--pink);
+      text-decoration: none;
+    }
+
+    .section a:hover {
+      color: var(--green);
+    }
+
+    /* LIGHTBOX */
+
     .lightbox {
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.95);
+      background: rgba(0,0,0,0.96);
       display: none;
       flex-direction: column;
       justify-content: center;
@@ -157,21 +355,24 @@
       padding: 40px 20px;
       text-align: center;
       animation: fadeIn 0.3s ease;
+      cursor: zoom-out;
     }
 
     .lightbox img {
       max-width: 90%;
-      max-height: 70%;
+      max-height: 75%;
+      object-fit: contain;
       margin-bottom: 20px;
+      cursor: default;
     }
 
     .lightbox-caption h3 {
-      color: #ff0767;
+      color: var(--pink);
       margin-bottom: 10px;
     }
 
     .lightbox-caption p {
-      color: #00eaff;
+      color: #999;
       max-width: 500px;
       font-size: 0.9rem;
     }
@@ -179,6 +380,66 @@
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
+    }
+
+    /* FOOTER */
+
+    footer {
+      text-align: center;
+      padding: 35px;
+      color: #555;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      border-top: 1px solid #171717;
+    }
+
+    /* MOBILE */
+
+    @media(max-width: 800px) {
+      header {
+        padding: 18px 20px;
+      }
+
+      header h2 {
+        font-size: 0.95rem;
+      }
+
+      nav {
+        gap: 12px;
+      }
+
+      nav a {
+        font-size: 0.75rem;
+      }
+
+      .choices {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+      }
+
+      .choice {
+        min-height: 230px;
+      }
+
+      .gallery {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .art {
+        width: 80%;
+      }
+    }
+
+    @media(max-width: 480px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .landing-title {
+        margin-bottom: 35px;
+      }
     }
   </style>
 </head>
@@ -193,122 +454,227 @@
   </h2>
 
   <nav>
-    <a href="#gallery">Archive</a>
-    <a href="#about">Info</a>
-    <a href="#contact">Contact</a>
+    <a href="#about" onclick="showInfo()">INFO</a>
+    <a href="#contact" onclick="showInfo()">CONTACT</a>
   </nav>
 </header>
 
-<section class="hero">
-  <h1>
-    <span class="star">✦</span> Francesca Fox <span class="star">✦</span>
-  </h1>
-  <p>distortion / digital intimacy</p>
+<!-- LANDING PAGE -->
+
+<main id="landing" class="landing">
+
+  <h1 class="landing-title">FRANCESCA FOX</h1>
+
+  <div class="choices">
+    <a href="#photography" class="choice" onclick="showPortfolio('photography')">
+      <span>PHOTOGRAPHY</span>
+    </a>
+
+    <a href="#art" class="choice" onclick="showPortfolio('art')">
+      <span>ART</span>
+    </a>
+  </div>
+
+</main>
+
+<!-- PHOTOGRAPHY PORTFOLIO -->
+
+<section id="photography" class="portfolio">
+
+  <div class="portfolio-heading">
+    <h1>PHOTOGRAPHY</h1>
+
+    <div class="portfolio-switch">
+      <a href="#photography" class="selected" onclick="showPortfolio('photography')">PHOTOGRAPHY</a>
+      <a href="#art" onclick="showPortfolio('art')">ART</a>
+    </div>
+  </div>
+
+  <div class="gallery">
+
+    <!-- ADD PHOTOGRAPHY IMAGES HERE.
+         Copy an image block from the ART section below.
+         Replace the image path, title, and alt text. -->
+
+  </div>
+
 </section>
 
-<section id="gallery" class="gallery">
-  <div class="art">
-    <img src="images/Scan 28.jpeg"
-         data-title="Scan 28 — 2026"
-         data-desc="signal loss / skin as interface / memory buffering">
-    <div class="overlay">Scan 28 — 2026</div>
+<!-- ART PORTFOLIO -->
+
+<section id="art" class="portfolio">
+
+  <div class="portfolio-heading">
+    <h1>ART</h1>
+
+    <div class="portfolio-switch">
+      <a href="#photography" onclick="showPortfolio('photography')">PHOTOGRAPHY</a>
+      <a href="#art" class="selected" onclick="showPortfolio('art')">ART</a>
+    </div>
   </div>
 
-  <div class="art">
-    <img src="images/SIX_F39F334F-35CB-42A5-BC2D-551E46DF3504.jpeg"
-         data-title="SIX_F39F334F — 2026"
-         data-desc="fragmented identity / compressed emotion">
-    <div class="overlay">SIX_F39F334F — 2026</div>
-  </div>
+  <section class="gallery">
 
-  <div class="art">
-    <img src="images/SIX_F269289E-94CB-469F-871C-A35833B1DD76.jpeg"
-         data-title="SIX_F269289E — 2026"
-         data-desc="glitch body / synthetic intimacy">
-    <div class="overlay">SIX_F269289E — 2026</div>
-  </div>
+    <div class="art">
+      <img src="images/Scan 28.jpeg"
+           alt="Artwork, Scan 28"
+           data-title="Scan 28 — 2026"
+           data-desc="">
+      <div class="overlay">Scan 28 — 2026</div>
+    </div>
 
-  <div class="art">
-    <img src="images/IMG_8532.jpeg"
-         data-title="IMG 8532 — 2026"
-         data-desc="surveillance gaze / blurred authorship">
-    <div class="overlay">IMG 8532 — 2026</div>
-  </div>
+    <div class="art">
+      <img src="images/SIX_F39F334F-35CB-42A5-BC2D-551E46DF3504.jpeg"
+           alt="Artwork, 2026"
+           data-title="Untitled — 2026"
+           data-desc="">
+      <div class="overlay">Untitled — 2026</div>
+    </div>
 
-  <div class="art">
-    <img src="images/IMG_1203.jpeg"
-         data-title="IMG 1203 — 2026"
-         data-desc="memory distortion / color as emotion">
-    <div class="overlay">IMG 1203 — 2026</div>
-  </div>
+    <div class="art">
+      <img src="images/SIX_F269289E-94CB-469F-871C-A35833B1DD76.jpeg"
+           alt="Artwork, 2026"
+           data-title="Untitled — 2026"
+           data-desc="">
+      <div class="overlay">Untitled — 2026</div>
+    </div>
 
-  <div class="art">
-    <img src="images/C58320A8-CE23-4446-8270-9CD3695F45A4.jpeg"
-         data-title="C58320A8 — 2026"
-         data-desc="digital body / interface collapse">
-    <div class="overlay">C58320A8 — 2026</div>
-  </div>
+    <div class="art">
+      <img src="images/IMG_8532.jpeg"
+           alt="Artwork, 2026"
+           data-title="Untitled — 2026"
+           data-desc="">
+      <div class="overlay">Untitled — 2026</div>
+    </div>
+
+    <div class="art">
+      <img src="images/IMG_1203.jpeg"
+           alt="Artwork, 2026"
+           data-title="Untitled — 2026"
+           data-desc="">
+      <div class="overlay">Untitled — 2026</div>
+    </div>
+
+    <div class="art">
+      <img src="images/C58320A8-CE23-4446-8270-9CD3695F45A4.jpeg"
+           alt="Artwork, 2026"
+           data-title="Untitled — 2026"
+           data-desc="">
+      <div class="overlay">Untitled — 2026</div>
+    </div>
+
+  </section>
+
 </section>
+
+<!-- INFO -->
+
+<section id="about" class="section">
+  <h2>Info</h2>
+  <p>
+    Francesca Fox is a photographer and multidisciplinary artist
+    working across photography, digital art, and visual design.
+  </p>
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact" class="section">
+  <h2>Contact</h2>
+  <p>
+    <a href="mailto:fffrannyfranfran469@gmail.com">
+      Get in touch
+    </a>
+  </p>
+  <p>
+    <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+    /
+    <a href="https://www.tiktok.com/@foxayymomma" target="_blank">TikTok</a>
+  </p>
+</section>
+
+<footer>
+  © 2026 FRANCESCA FOX
+</footer>
 
 <!-- LIGHTBOX -->
+
 <div id="lightbox" class="lightbox">
-  <img id="lightbox-img">
+  <img id="lightbox-img" alt="">
   <div class="lightbox-caption">
     <h3 id="lightbox-title"></h3>
     <p id="lightbox-desc"></p>
   </div>
 </div>
 
-<section id="about" class="section">
-  <h2>Info</h2>
-  <p>
-    I explore the relationship between body, technology, and perception.
-    My work uses color, distortion, and composition to investigate
-    digital intimacy and emotional projection.
-  </p>
-</section>
-
-<section id="contact" class="section">
-  <h2>Contact</h2>
-  <p>Email: fffrannyfranfran469@gmail.com</p>
-  <p>
-    <a href="#">Instagram</a> /
-    <a href="https://www.tiktok.com/@foxayymomma" target="_blank">TikTok</a>
-  </p>
-</section>
-
-<footer>
-  <p>© 2026 Francesca Fox</p>
-</footer>
-
 <script>
+
+  // CURSOR EFFECT
+
   window.addEventListener("load", () => {
-    new cursoreffects.fairyDustCursor({
-      colors: ["#ff0767", "#00eaff", "#ff8cf0"],
-      fairySymbol: "✧"
-    });
+    if (window.cursoreffects) {
+      new cursoreffects.fairyDustCursor({
+        colors: ["#ff0767", "#79ff00", "#ff8cf0"],
+        fairySymbol: "✧"
+      });
+    }
   });
 
+
+  // PAGE NAVIGATION
+
+  function showPortfolio(section) {
+    document.getElementById("landing").style.display = "none";
+
+    document.querySelectorAll(".portfolio").forEach(page => {
+      page.classList.remove("active");
+    });
+
+    document.getElementById(section).classList.add("active");
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function showInfo() {
+    document.getElementById("landing").style.display = "none";
+
+    document.querySelectorAll(".portfolio").forEach(page => {
+      page.classList.remove("active");
+    });
+  }
+
+
+  // LIGHTBOX
+
   const lightbox = document.getElementById("lightbox");
-  const img = document.getElementById("lightbox-img");
-  const title = document.getElementById("lightbox-title");
-  const desc = document.getElementById("lightbox-desc");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxTitle = document.getElementById("lightbox-title");
+  const lightboxDesc = document.getElementById("lightbox-desc");
 
   document.querySelectorAll(".art img").forEach(image => {
     image.addEventListener("click", () => {
       lightbox.style.display = "flex";
-      img.src = image.src;
-      title.textContent = image.dataset.title;
-      desc.textContent = image.dataset.desc;
+      lightboxImg.src = image.src;
+      lightboxImg.alt = image.alt;
+      lightboxTitle.textContent = image.dataset.title;
+      lightboxDesc.textContent = image.dataset.desc;
     });
   });
 
-  lightbox.addEventListener("click", (e) => {
-    if (e.target !== img) {
+  lightbox.addEventListener("click", (event) => {
+    if (event.target !== lightboxImg) {
       lightbox.style.display = "none";
     }
   });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      lightbox.style.display = "none";
+    }
+  });
+
 </script>
 
 </body>
 </html>
+```
