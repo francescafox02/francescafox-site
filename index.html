@@ -2,113 +2,154 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Francesca Fox | Shesafox</title>
+  <title>Francesca Fox | She's a Fox</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: Helvetica, Arial, sans-serif;
-      background: radial-gradient(circle at top, #0a0a0a, #000);
+      background: #000;
       color: white;
       cursor: crosshair;
     }
 
+    /* HEADER */
+
     header {
       display: flex;
       justify-content: space-between;
-      padding: 20px 40px;
-      border-bottom: 1px solid #111;
+      align-items: center;
+      padding: 22px 40px;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.96);
     }
 
     header h2 {
       color: #ff0767;
       letter-spacing: 2px;
+      font-size: 1.25rem;
+      margin: 0;
+      white-space: nowrap;
     }
 
-    .diamond { display: inline-block; margin: 0 6px; color: #ff0767; }
-    .diamond-left { animation: rotateLeft 4s linear infinite; }
-    .diamond-right { animation: rotateRight 4s linear infinite; }
+    .diamond {
+      display: inline-block;
+      margin: 0 6px;
+      color: #ff0767;
+    }
 
-    .apostrophe { color: #ff0767; }
+    .diamond-left {
+      animation: rotateLeft 4s linear infinite;
+    }
 
-    @keyframes rotateLeft { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
-    @keyframes rotateRight { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .diamond-right {
+      animation: rotateRight 4s linear infinite;
+    }
+
+    .apostrophe {
+      color: #ff0767;
+    }
+
+    @keyframes rotateLeft {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+
+    @keyframes rotateRight {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
 
     nav a {
-      margin-left: 20px;
       text-decoration: none;
-      color: #79ff00;
-      font-size: 0.9rem;
-      transition: 0.3s;
+      color: white;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
     }
 
-    nav a:hover { color: #00eaff; }
-
-    .hero {
-      text-align: center;
-      padding: 120px 20px 80px;
-    }
-
-    .hero h1 { font-size: 3.2rem; color: #ff0767; }
-
-    .hero p {
-      color: #00eaff;
-      letter-spacing: 2px;
-      margin-top: 10px;
-      font-size: 0.9rem;
-    }
-
-    .star {
+    nav a:hover,
+    nav a.active {
       color: #ff0767;
-      margin: 0 5px;
-      display: inline-block;
-      animation: pulse 2s infinite alternate;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.7; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.7; }
+    /* PAGE CONTENT */
+
+    main {
+      padding: 35px 40px 60px;
     }
+
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: normal;
+      margin: 0 0 28px;
+      color: #79ff00;
+      letter-spacing: 1px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* IMAGE GRID */
 
     .gallery {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      padding: 20px;
-      scroll-snap-type: x mandatory;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
     }
 
     .art {
-      flex: 0 0 auto;
-      width: 300px;
       position: relative;
       overflow: hidden;
-      scroll-snap-align: center;
-      border-radius: 8px;
+      cursor: pointer;
     }
 
     .art img {
       width: 100%;
+      height: 100%;
       display: block;
+      object-fit: cover;
       transition: transform 0.4s, filter 0.4s;
-      cursor: pointer;
     }
 
     .art:hover img {
-      transform: scale(1.05);
-      filter: brightness(1.2);
+      transform: scale(1.035);
+      filter: brightness(1.1);
     }
 
     .overlay {
       position: absolute;
       bottom: 0;
+      left: 0;
       width: 100%;
-      padding: 12px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+      padding: 18px 12px 12px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
       opacity: 0;
       transition: opacity 0.3s;
       color: #ff0767;
@@ -117,38 +158,35 @@
       text-transform: uppercase;
     }
 
-    .art:hover .overlay { opacity: 1; }
-
-    .section {
-      padding: 80px 40px;
-      max-width: 700px;
-      margin: auto;
-      text-align: center;
+    .art:hover .overlay {
+      opacity: 1;
     }
 
-    .section h2 { color: #79ff00; }
+    /* INFO AND CONTACT */
 
-    footer {
-      text-align: center;
-      padding: 40px;
-      color: #555;
-      font-size: 0.8rem;
+    .section-content {
+      max-width: 650px;
+      line-height: 1.7;
+      font-size: 1rem;
     }
 
-    .gallery::-webkit-scrollbar { display: none; }
-
-    @media(max-width: 800px) {
-      .art { width: 80%; }
+    .section-content a {
+      color: #79ff00;
+      text-decoration: none;
     }
 
-    /* ✨ LIGHTBOX */
+    .section-content a:hover {
+      color: #ff0767;
+    }
+
+    /* LIGHTBOX */
+
     .lightbox {
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.95);
+      background: rgba(0,0,0,0.96);
       display: none;
       flex-direction: column;
       justify-content: center;
@@ -156,12 +194,12 @@
       z-index: 9999;
       padding: 40px 20px;
       text-align: center;
-      animation: fadeIn 0.3s ease;
     }
 
     .lightbox img {
       max-width: 90%;
-      max-height: 70%;
+      max-height: 75vh;
+      object-fit: contain;
       margin-bottom: 20px;
     }
 
@@ -176,9 +214,51 @@
       font-size: 0.9rem;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #555;
+      font-size: 0.8rem;
+      border-top: 1px solid #222;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+      header {
+        padding: 18px 20px;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+
+      nav {
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      nav a {
+        font-size: 0.75rem;
+      }
+
+      main {
+        padding: 28px 20px 50px;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -193,118 +273,183 @@
   </h2>
 
   <nav>
-    <a href="#gallery">Archive</a>
-    <a href="#about">Info</a>
-    <a href="#contact">Contact</a>
+    <a href="#" class="nav-link" data-page="photography">Photography</a>
+    <a href="#" class="nav-link active" data-page="art">Art</a>
+    <a href="#" class="nav-link" data-page="info">Info</a>
+    <a href="#" class="nav-link" data-page="contact">Contact</a>
   </nav>
 </header>
 
-<section class="hero">
-  <h1>
-    <span class="star">✦</span> Francesca Fox <span class="star">✦</span>
-  </h1>
-  <p>distortion / digital intimacy</p>
-</section>
+<main>
 
-<section id="gallery" class="gallery">
-  <div class="art">
-    <img src="images/Scan 28.jpeg"
-         data-title="Scan 28 — 2026"
-         data-desc="signal loss / skin as interface / memory buffering">
-    <div class="overlay">Scan 28 — 2026</div>
-  </div>
+  <!-- PHOTOGRAPHY -->
 
-  <div class="art">
-    <img src="images/SIX_F39F334F-35CB-42A5-BC2D-551E46DF3504.jpeg"
-         data-title="SIX_F39F334F — 2026"
-         data-desc="fragmented identity / compressed emotion">
-    <div class="overlay">SIX_F39F334F — 2026</div>
-  </div>
+  <section id="photography" class="page">
+    <h1 class="page-title">Photography</h1>
 
-  <div class="art">
-    <img src="images/SIX_F269289E-94CB-469F-871C-A35833B1DD76.jpeg"
-         data-title="SIX_F269289E — 2026"
-         data-desc="glitch body / synthetic intimacy">
-    <div class="overlay">SIX_F269289E — 2026</div>
-  </div>
+    <div class="gallery">
+      <!-- Add your photography images here -->
+    </div>
+  </section>
 
-  <div class="art">
-    <img src="images/IMG_8532.jpeg"
-         data-title="IMG 8532 — 2026"
-         data-desc="surveillance gaze / blurred authorship">
-    <div class="overlay">IMG 8532 — 2026</div>
-  </div>
+  <!-- ART -->
 
-  <div class="art">
-    <img src="images/IMG_1203.jpeg"
-         data-title="IMG 1203 — 2026"
-         data-desc="memory distortion / color as emotion">
-    <div class="overlay">IMG 1203 — 2026</div>
-  </div>
+  <section id="art" class="page active">
+    <h1 class="page-title">Art</h1>
 
-  <div class="art">
-    <img src="images/C58320A8-CE23-4446-8270-9CD3695F45A4.jpeg"
-         data-title="C58320A8 — 2026"
-         data-desc="digital body / interface collapse">
-    <div class="overlay">C58320A8 — 2026</div>
-  </div>
-</section>
+    <div class="gallery">
+
+      <div class="art">
+        <img src="images/Scan 28.jpeg"
+             data-title="Scan 28 — 2026"
+             data-desc="">
+        <div class="overlay">Scan 28 — 2026</div>
+      </div>
+
+      <div class="art">
+        <img src="images/SIX_F39F334F-35CB-42A5-BC2D-551E46DF3504.jpeg"
+             data-title="SIX_F39F334F — 2026"
+             data-desc="">
+        <div class="overlay">SIX_F39F334F — 2026</div>
+      </div>
+
+      <div class="art">
+        <img src="images/SIX_F269289E-94CB-469F-871C-A35833B1DD76.jpeg"
+             data-title="SIX_F269289E — 2026"
+             data-desc="">
+        <div class="overlay">SIX_F269289E — 2026</div>
+      </div>
+
+      <div class="art">
+        <img src="images/IMG_8532.jpeg"
+             data-title="IMG 8532 — 2026"
+             data-desc="">
+        <div class="overlay">IMG 8532 — 2026</div>
+      </div>
+
+      <div class="art">
+        <img src="images/IMG_1203.jpeg"
+             data-title="IMG 1203 — 2026"
+             data-desc="">
+        <div class="overlay">IMG 1203 — 2026</div>
+      </div>
+
+      <div class="art">
+        <img src="images/C58320A8-CE23-4446-8270-9CD3695F45A4.jpeg"
+             data-title="C58320A8 — 2026"
+             data-desc="">
+        <div class="overlay">C58320A8 — 2026</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INFO -->
+
+  <section id="info" class="page">
+    <h1 class="page-title">Info</h1>
+
+    <div class="section-content">
+      <p>
+        Francesca Fox is a photographer and multidisciplinary artist
+        based in the San Francisco Bay Area.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+
+  <section id="contact" class="page">
+    <h1 class="page-title">Contact</h1>
+
+    <div class="section-content">
+      <p>
+        <a href="mailto:fffrannyfranfran469@gmail.com">
+          fffrannyfranfran469@gmail.com
+        </a>
+      </p>
+
+      <p>
+        <a href="https://www.tiktok.com/@foxayymomma" target="_blank">
+          TikTok
+        </a>
+      </p>
+    </div>
+  </section>
+
+</main>
 
 <!-- LIGHTBOX -->
+
 <div id="lightbox" class="lightbox">
-  <img id="lightbox-img">
+  <img id="lightbox-img" alt="">
   <div class="lightbox-caption">
     <h3 id="lightbox-title"></h3>
     <p id="lightbox-desc"></p>
   </div>
 </div>
 
-<section id="about" class="section">
-  <h2>Info</h2>
-  <p>
-    I explore the relationship between body, technology, and perception.
-    My work uses color, distortion, and composition to investigate
-    digital intimacy and emotional projection.
-  </p>
-</section>
-
-<section id="contact" class="section">
-  <h2>Contact</h2>
-  <p>Email: fffrannyfranfran469@gmail.com</p>
-  <p>
-    <a href="#">Instagram</a> /
-    <a href="https://www.tiktok.com/@foxayymomma" target="_blank">TikTok</a>
-  </p>
-</section>
-
 <footer>
-  <p>© 2026 Francesca Fox</p>
+  © 2026 Francesca Fox
 </footer>
 
 <script>
+  // Cursor effect
+
   window.addEventListener("load", () => {
-    new cursoreffects.fairyDustCursor({
-      colors: ["#ff0767", "#00eaff", "#ff8cf0"],
-      fairySymbol: "✧"
+    if (window.cursoreffects) {
+      new cursoreffects.fairyDustCursor({
+        colors: ["#ff0767", "#00eaff", "#ff8cf0"],
+        fairySymbol: "✧"
+      });
+    }
+  });
+
+  // Navigation
+
+  const navLinks = document.querySelectorAll(".nav-link");
+  const pages = document.querySelectorAll(".page");
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", event => {
+      event.preventDefault();
+
+      const pageName = link.dataset.page;
+
+      pages.forEach(page => {
+        page.classList.toggle("active", page.id === pageName);
+      });
+
+      navLinks.forEach(navLink => {
+        navLink.classList.toggle("active", navLink === link);
+      });
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
 
+  // Lightbox
+
   const lightbox = document.getElementById("lightbox");
-  const img = document.getElementById("lightbox-img");
-  const title = document.getElementById("lightbox-title");
-  const desc = document.getElementById("lightbox-desc");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxTitle = document.getElementById("lightbox-title");
+  const lightboxDesc = document.getElementById("lightbox-desc");
 
   document.querySelectorAll(".art img").forEach(image => {
     image.addEventListener("click", () => {
       lightbox.style.display = "flex";
-      img.src = image.src;
-      title.textContent = image.dataset.title;
-      desc.textContent = image.dataset.desc;
+      lightboxImg.src = image.src;
+      lightboxTitle.textContent = image.dataset.title;
+      lightboxDesc.textContent = image.dataset.desc;
     });
   });
 
-  lightbox.addEventListener("click", (e) => {
-    if (e.target !== img) {
+  lightbox.addEventListener("click", () => {
+    lightbox.style.display = "none";
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
       lightbox.style.display = "none";
     }
   });
